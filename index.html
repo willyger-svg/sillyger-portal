@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sillyger Community — Agentic AI & Termux Portal</title>
+  <meta name="description" content="Portal rasmi ya Sillyger Technology Community: Unganisha Google Antigravity, GitHub, na AI Agents za bure kwenye Termux ya simu yako." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #060913;
+      --bg-card: rgba(15, 23, 42, 0.78);
+      --bg-card-solid: #0f172a;
+      --border: rgba(148, 163, 184, 0.16);
+      --border-glow: rgba(16, 185, 129, 0.45);
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --primary: #10b981;
+      --primary-bright: #34d399;
+      --cyan: #06b6d4;
+      --amber: #f59e0b;
+      --purple: #a855f7;
+      --danger: #ef4444;
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Space Grotesk", system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image:
+        radial-gradient(circle at 15% 10%, rgba(16, 185, 129, 0.16), transparent 40%),
+        radial-gradient(circle at 85% 20%, rgba(6, 182, 212, 0.15), transparent 42%),
+        radial-gradient(circle at 50% 90%, rgba(168, 85, 247, 0.12), transparent 45%),
+        linear-gradient(rgba(148, 163, 184, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148, 163, 184, 0.035) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 20px 16px 72px;
+    }
+
+    /* Top Nav */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 16px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      backdrop-filter: blur(14px);
+      margin-bottom: 28px;
+      position: sticky;
+      top: 12px;
+      z-index: 50;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 0.98rem;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 14px var(--primary);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.25); opacity: 0.7; }
+    }
+
+    .progress-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--primary-bright);
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 24px 8px 30px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #67e8f9;
+      background: rgba(6, 182, 212, 0.12);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 6vw, 3.1rem);
+      line-height: 1.12;
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .gradient-text {
+      background: linear-gradient(120deg, #34d399 0%, #22d3ee 55%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      color: var(--muted);
+      font-size: 1.03rem;
+      max-width: 620px;
+      margin: 0 auto 24px;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .stat-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 10px;
+      backdrop-filter: blur(10px);
+    }
+
+    .stat-num {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary-bright);
+    }
+
+    .stat-label {
+      font-size: 0.76rem;
+      color: var(--muted);
+    }
+
+    /* Card */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      margin-bottom: 18px;
+      backdrop-filter: blur(12px);
+      transition: border-color 0.25s ease, transform 0.2s ease;
+    }
+
+    .card.highlight {
+      border-color: var(--border-glow);
+      box-shadow: 0 0 40px rgba(16, 185, 129, 0.08);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .step-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(6, 182, 212, 0.25));
+      border: 1px solid rgba(52, 211, 153, 0.4);
+      color: var(--primary-bright);
+      flex-shrink: 0;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      line-height: 1.25;
+    }
+
+    .step-desc {
+      color: var(--muted);
+      font-size: 0.94rem;
+      margin-bottom: 16px;
+    }
+
+    /* Email Gate */
+    .email-form {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .email-input {
+      flex: 1 1 230px;
+      background: #070d1d;
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      border-radius: 12px;
+      padding: 13px 15px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.96rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .email-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.16);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.94rem;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--cyan));
+      color: #031411;
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.26);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 10px 28px rgba(16, 185, 129, 0.38);
+    }
+
+    .btn-secondary {
+      background: rgba(30, 41, 59, 0.9);
+      color: var(--text);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(148, 163, 184, 0.5);
+    }
+
+    .btn-purple {
+      background: linear-gradient(135deg, #9333ea, #06b6d4);
+      color: #ffffff;
+      box-shadow: 0 8px 24px rgba(147, 51, 234, 0.26);
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    /* Alert boxes */
+    .status-banner {
+      margin-top: 14px;
+      padding: 13px 15px;
+      border-radius: 12px;
+      font-size: 0.92rem;
+      display: none;
+    }
+
+    .status-banner.show {
+      display: block;
+    }
+
+    .status-success {
+      background: rgba(16, 185, 129, 0.14);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #a7f3d0;
+    }
+
+    .status-warn {
+      background: rgba(245, 158, 11, 0.13);
+      border: 1px solid rgba(245, 158, 11, 0.38);
+      color: #fde68a;
+    }
+
+    .alert-box {
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: 0.88rem;
+      margin: 12px 0;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.32);
+      color: #fde68a;
+    }
+
+    /* Progress Bar */
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      background: rgba(30, 41, 59, 0.9);
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 10px 0 6px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--cyan), var(--purple));
+      border-radius: 999px;
+      transition: width 0.35s ease;
+    }
+
+    /* Code Box */
+    .code-box {
+      background: #040711;
+      border: 1px solid rgba(52, 211, 153, 0.25);
+      border-radius: 14px;
+      overflow: hidden;
+      margin: 14px 0;
+    }
+
+    .code-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      background: rgba(15, 23, 42, 0.9);
+      border-bottom: 1px solid var(--border);
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .code-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .code-dots span {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+    }
+
+    .code-content {
+      padding: 14px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.82rem;
+      color: #6ee7b7;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .mini-copy {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--primary-bright);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: 8px;
+      padding: 4px 10px;
+      font-family: inherit;
+      font-size: 0.76rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* Check toggle */
+    .check-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.84rem;
+      color: var(--muted);
+      cursor: pointer;
+      user-select: none;
+      padding: 6px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.6);
+      flex-shrink: 0;
+    }
+
+    .check-label input {
+      accent-color: var(--primary);
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    .card.completed {
+      border-color: rgba(16, 185, 129, 0.5);
+    }
+
+    .card.completed .step-num {
+      background: var(--primary);
+      color: #031411;
+    }
+
+    /* Free AI Agents Grid */
+    .agents-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .agent-card {
+      background: rgba(7, 13, 29, 0.85);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .agent-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(6, 182, 212, 0.14);
+      color: #67e8f9;
+      margin-bottom: 6px;
+    }
+
+    .agent-card h3 {
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .agent-card p {
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    .agent-cmd {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.76rem;
+      background: #03060f;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 7px 9px;
+      color: #a7f3d0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    /* FAQ */
+    details {
+      background: rgba(7, 13, 29, 0.7);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 13px 15px;
+      margin-bottom: 10px;
+    }
+
+    summary {
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.94rem;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    summary::after {
+      content: "+";
+      color: var(--primary-bright);
+      font-size: 1.2rem;
+    }
+
+    details[open] summary::after {
+      content: "−";
+    }
+
+    details p {
+      color: var(--muted);
+      font-size: 0.89rem;
+      margin-top: 10px;
+    }
+
+    /* Quote Footer */
+    .quote-box {
+      text-align: center;
+      padding: 26px 20px;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.14), rgba(6, 182, 212, 0.12), rgba(168, 85, 247, 0.14));
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      margin-top: 24px;
+    }
+
+    .quote-box p {
+      font-size: 1.06rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .quote-box span {
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(90px);
+      background: #064e3b;
+      color: #ecfdf5;
+      border: 1px solid var(--primary);
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.5);
+      transition: transform 0.25s ease;
+      z-index: 100;
+      max-width: 92vw;
+      text-align: center;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .locked-note {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 520px) {
+      .card { padding: 18px 15px; }
+      .stats-row { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+      .card-header { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Sticky Header -->
+    <nav class="topbar">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <span>SILLYGER PORTAL</span>
+      </div>
+      <div class="progress-pill">
+        <span>Maendeleo:</span>
+        <span id="navProgress">0%</span>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+      <div class="badge">🚀 Sillyger Technology Community • Onboarding</div>
+      <h1>Jenga Mifumo, Websites &amp; Apps — <span class="gradient-text">Kwa Simu Yako Tu.</span></h1>
+      <p class="hero-sub">
+        Hauhitaji laptop ya gharama ili uanze kutengeneza teknolojia. Unganisha
+        <strong>Google Antigravity</strong>, <strong>GitHub</strong>, na <strong>AI Agents za bure</strong>
+        kwenye <strong>Termux</strong> ndani ya dakika 5.
+      </p>
+      <div class="stats-row">
+        <div class="stat-box">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Simu + Termux</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">5+</div>
+          <div class="stat-label">AI Agents za Bure</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">0 → Pro</div>
+          <div class="stat-label">Hatua kwa Hatua</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Email Verification Gate -->
+    <section class="card highlight" id="gateCard">
+      <div class="card-header">
+        <div class="step-title-wrap">
+          <div class="step-num">🔐</div>
+          <div>
+            <h2>Hatua ya Kwanza: Thibitisha Email Yako ya Sillyger</h2>
+          </div>
+        </div>
+      </div>
+      <p class="step-desc">
+        Ingiza <strong>Email yako active</strong> uliyotuma kwenye group la <strong>Sillyger Community</strong> ili kufungua mpango wako wa Antigravity &amp; Termux.
+      </p>
+
+      <form class="email-form" id="emailForm">
+        <input
+          type="email"
+          id="emailInput"
+          class="email-input"
+          placeholder="mfano: jinalako@gmail.com"
+          required
+          autocomplete="email"
+        />
+        <button type="submit" class="btn btn-primary">Fungua Portal 🚀</button>
+      </form>
+
+      <div id="gateBanner" class="status-banner"></div>
+
+      <p class="locked-note">
+        Bado hujatuma email yako? Tuma kwanza kwenye group la <strong>Sillyger Community</strong> au
+        <a href="#stepsArea" id="previewBtn" style="color:#67e8f9; text-decoration:underline;">kagua mwongozo hapa</a>.
+      </p>
+    </section>
+
+    <!-- Main Onboarding Steps -->
+    <main id="stepsArea">
+      <!-- Progress Summary -->
+      <section class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
+          <div>
+            <strong id="welcomeUser">Karibu kwenye Safari yako ya Tech! 🔥</strong>
+            <div style="font-size:0.86rem; color:var(--muted);" id="progressHint">
+              Kamilisha hatua 4 hapa chini uanze kuunda miradi halisi kwenye simu yako.
+            </div>
+          </div>
+          <span id="stepCountLabel" style="font-weight:700; color:var(--primary-bright);">0 / 4 Tayari</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressBar"></div>
+        </div>
+      </section>
+
+      <!-- STEP 1: Google Antigravity -->
+      <section class="card" data-step="step1">
+        <div class="card-header">
+          <div class="step-title-wrap">
+            <div class="step-num">1</div>
+            <div>
+              <h2>Unganisha Google Antigravity (AGY) 🌌</h2>
+            </div>
+          </div>
+          <label class="check-label">
+            <input type="checkbox" class="step-check" data-step="step1" />
+            <span>Nimemaliza</span>
+          </label>
+        </div>
+        <p class="step-desc">
+          Bonyeza kitufe hapa chini kuingia kwenye <strong>Google Antigravity</strong> kwa kutumia
+          <strong>email hiyo hiyo active</strong> uliyotuma kwenye group la Sillyger.
+        </p>
+        <div class="btn-row">
+          <a href="https://antigravity.google" target="_blank" rel="noopener" class="btn btn-purple">
+            🌌 Fungua Google Antigravity
+          </a>
+          <a href="https://github.com/signup" target="_blank" rel="noopener" class="btn btn-secondary">
+            🐙 Fungua Akaunti ya GitHub
+          </a>
+          <a href="https://education.github.com/pack" target="_blank" rel="noopener" class="btn btn-secondary">
+            🎓 GitHub Student Pack (Bure)
+          </a>
+        </div>
+      </section>
+
+      <!-- STEP 2: Install Termux -->
+      <section class="card" data-step="step2">
+        <div class="card-header">
+          <div class="step-title-wrap">
+            <div class="step-num">2</div>
+            <div>
+              <h2>Pakua Termux Halisi (Kutoka F-Droid) 📲</h2>
+            </div>
+          </div>
+          <label class="check-label">
+            <input type="checkbox" class="step-check" data-step="step2" />
+            <span>Nimemaliza</span>
+          </label>
+        </div>
+        <p class="step-desc">
+          <strong>Termux</strong> ndiyo terminal ya Linux ndani ya simu yako ya Android — hapa ndipo tutakapo-run
+          <strong>C Programming (GCC)</strong>, <strong>GitHub</strong>, na <strong>Agentic AI</strong>.
+        </p>
+        <div class="alert-box">
+          ⚠️ <strong>Muhimu:</strong> Usipakue Termux ya zamani kwenye Play Store (mara nyingi inakataa packages). Tumia toleo rasmi la <strong>F-Droid</strong> au <strong>GitHub Releases</strong> hapa chini.
+        </div>
+        <div class="btn-row">
+          <a href="https://f-droid.org/en/packages/com.termux/" target="_blank" rel="noopener" class="btn btn-primary">
+            ⬇️ Pakua Termux (F-Droid)
+          </a>
+          <a href="https://github.com/termux/termux-app/releases/latest" target="_blank" rel="noopener" class="btn btn-secondary">
+            📦 Termux APK (GitHub)
+          </a>
+        </div>
+      </section>
+
+      <!-- STEP 3: One-Tap Copy Command & Open Termux -->
+      <section class="card highlight" data-step="step3">
+        <div class="card-header">
+          <div class="step-title-wrap">
+            <div class="step-num">3</div>
+            <div>
+              <h2>Copy Command &amp; Run Kwenye Termux ⚡</h2>
+            </div>
+          </div>
+          <label class="check-label">
+            <input type="checkbox" class="step-check" data-step="step3" />
+            <span>Nimemaliza</span>
+          </label>
+        </div>
+        <p class="step-desc">
+          Kwa usalama wa Android, bonyeza kitufe kimoja cha <strong>Copy &amp; Fungua Termux</strong> hapa chini.
+          Ukishaingia ndani ya Termux, <strong>bonyeza screen muda mrefu → Paste → Enter</strong>.
+          Ita-install <code>git</code>, <code>nodejs</code>, <code>clang/gcc</code> (kwa C Programming), <code>python</code>, <code>gh</code>, na <code>Gemini CLI</code> moja kwa moja!
+        </p>
+
+        <div class="code-box">
+          <div class="code-bar">
+            <div class="code-dots">
+              <span style="background:#ef4444;"></span>
+              <span style="background:#f59e0b;"></span>
+              <span style="background:#10b981;"></span>
+            </div>
+            <span>Sillyger Termux Auto-Setup</span>
+            <button type="button" class="mini-copy" data-copy="mainSetupCmd">📋 Copy</button>
+          </div>
+          <pre class="code-content" id="mainSetupCmd">curl -fsSL https://willyger-svg.github.io/sillyger-portal/setup.sh | bash</pre>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn btn-primary" id="copyAndOpenBtn">
+            📋 Copy Command &amp; Fungua Termux 🚀
+          </button>
+          <button type="button" class="btn btn-secondary" data-copy="storageCmd">
+            📂 Copy: termux-setup-storage
+          </button>
+        </div>
+        <code id="storageCmd" class="hidden">termux-setup-storage</code>
+
+        <div style="margin-top:14px; font-size:0.85rem; color:var(--muted);">
+          <strong>Ukimaliza ku-install, andika hivi ndani ya Termux:</strong><br />
+          1. <code>gemini</code> — kuingia kwa Gmail yako (AI Agent ya bure ya Google)<br />
+          2. <code>agy</code> — kuwasha Google Antigravity CLI (baada ya akaunti yako kuwezeshwa)<br />
+          3. <code>gh auth login</code> — kuunganisha akaunti yako ya GitHub
+        </div>
+      </section>
+
+      <!-- STEP 4: Free AI Coding Agents Toolkit -->
+      <section class="card" data-step="step4">
+        <div class="card-header">
+          <div class="step-title-wrap">
+            <div class="step-num">4</div>
+            <div>
+              <h2>AI Coding Agents za Bure (Toolkit Yako) 🤖</h2>
+            </div>
+          </div>
+          <label class="check-label">
+            <input type="checkbox" class="step-check" data-step="step4" />
+            <span>Nimemaliza</span>
+          </label>
+        </div>
+        <p class="step-desc">
+          Mbali na <strong>Google Antigravity</strong>, hizi ni zana nyingine za bure unazoweza kuweka kwenye Termux ukaanza kujenga websites na apps leo:
+        </p>
+
+        <div class="agents-grid">
+          <div class="agent-card">
+            <div>
+              <span class="agent-tag">Google • Bure</span>
+              <h3>Gemini CLI</h3>
+              <p>AI agent rasmi ya Google kwenye terminal. Ingia na Gmail yako upate free tier kubwa.</p>
+            </div>
+            <div class="agent-cmd">
+              <span>npm i -g @google/gemini-cli</span>
+              <button type="button" class="mini-copy" data-text="npm install -g @google/gemini-cli">Copy</button>
+            </div>
+          </div>
+
+          <div class="agent-card">
+            <div>
+              <span class="agent-tag">Open Source • Bure</span>
+              <h3>Qwen Code</h3>
+              <p>Coding agent ya kasi yenye free tier nzuri sana kwa kujenga miradi ya web na C.</p>
+            </div>
+            <div class="agent-cmd">
+              <span>npm i -g @qwen-code/qwen-code</span>
+              <button type="button" class="mini-copy" data-text="npm install -g @qwen-code/qwen-code">Copy</button>
+            </div>
+          </div>
+
+          <div class="agent-card">
+            <div>
+              <span class="agent-tag">Multi-Model • Bure</span>
+              <h3>OpenCode</h3>
+              <p>Inaunganisha models nyingi za bure (Gemini, OpenRouter, Groq, GitHub Copilot).</p>
+            </div>
+            <div class="agent-cmd">
+              <span>npm i -g opencode-ai</span>
+              <button type="button" class="mini-copy" data-text="npm install -g opencode-ai">Copy</button>
+            </div>
+          </div>
+
+          <div class="agent-card">
+            <div>
+              <span class="agent-tag">C Programming • Offline</span>
+              <h3>GCC / Clang (Termux)</h3>
+              <p>Compile na run code zako za C (Hello World, scanf, n.k.) moja kwa moja kwenye simu!</p>
+            </div>
+            <div class="agent-cmd">
+              <span>clang hello.c -o hello &amp;&amp; ./hello</span>
+              <button type="button" class="mini-copy" data-text="clang hello.c -o hello && ./hello">Copy</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Troubleshooting / FAQ -->
+      <section class="card">
+        <h2 style="margin-bottom:14px;">❓ Maswali ya Haraka &amp; Msaada</h2>
+
+        <details>
+          <summary>Kwa nini Termux haiji-run command yenyewe moja kwa moja?</summary>
+          <p>
+            Kwa usalama wa Android, browser haiwezi ku-execute command moja kwa moja kwenye Termux.
+            Ndio maana kitufe cha <strong>Copy &amp; Fungua Termux</strong> kinakucopy-ia command tayari —
+            wewe unagusa tu screen muda mrefu ndani ya Termux kisha <strong>Paste → Enter</strong>.
+          </p>
+        </details>
+
+        <details>
+          <summary>Termux ikiniuliza [Y/n] au [default=N] wakati wa ku-install nifanyeje?</summary>
+          <p>
+            Bonyeza tu <strong>Enter</strong> (au andika <code>Y</code> kisha Enter) ili kuruhusu updates zimalizike.
+          </p>
+        </details>
+
+        <details>
+          <summary>Sina laptop kabisa — je kweli nitaweza kutengeneza website au app?</summary>
+          <p>
+            <strong>Ndiyo 100%!</strong> Kwenye Termux una Linux kamili yenye Node.js, Python, Git, C compiler,
+            na AI Agents zinazoweza kuandika code, ku-test server kwenye simu yako, na kupandisha mradi wako live kwenye GitHub Pages!
+          </p>
+        </details>
+      </section>
+
+      <!-- Closing Motivation -->
+      <footer class="quote-box">
+        <p>"Hauhitaji laptop ya milioni 3 ili uanze kujenga teknolojia. Unahitaji simu yako, nia yako, na hatua ya kwanza leo."</p>
+        <span>🚀 Sillyger Technology Community — From Zero to Technology Mastery</span>
+      </footer>
+    </main>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // Orodha ya wanachama waliothibitishwa (ongeza emails mpya hapa kadri zinavyoingia!)
+    const APPROVED_MEMBERS = {
+      "jovinmagobe1201@gmail.com": { name: "Vinny_sability (Jovin)", role: "Member" },
+      "magrethtriphon4@gmail.com": { name: "Magreth Triphon", role: "Member" },
+      "jamesramadhan976@gmail.com": { name: "Captain Ramson", role: "Member" },
+      "jamesramadhan@976gmail.com": { name: "Captain Ramson (Rekebisha typo: jamesramadhan976@gmail.com)", role: "Member" },
+      "leahr6871@gmail.com": { name: "Sillyger Member (Leah)", role: "Member" },
+      "wshavu@gmail.com": { name: "Willyger", role: "Founder / Admin" },
+      "admin@sillyger.tech": { name: "Willyger", role: "Founder / Admin" }
+    };
+
+    const toastEl = document.getElementById("toast");
+    let toastTimer = null;
+
+    function showToast(msg) {
+      toastEl.textContent = msg;
+      toastEl.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toastEl.classList.remove("show"), 3400);
+    }
+
+    async function copyText(text) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        let ok = false;
+        try { ok = document.execCommand("copy"); } catch {}
+        document.body.removeChild(ta);
+        return ok;
+      }
+    }
+
+    // Email Verification Gate
+    const emailForm = document.getElementById("emailForm");
+    const emailInput = document.getElementById("emailInput");
+    const gateBanner = document.getElementById("gateBanner");
+    const welcomeUser = document.getElementById("welcomeUser");
+
+    function applyMember(email) {
+      const clean = email.trim().toLowerCase();
+      const member = APPROVED_MEMBERS[clean];
+      if (member) {
+        localStorage.setItem("sillyger_email", clean);
+        gateBanner.className = "status-banner status-success show";
+        gateBanner.innerHTML = `✅ <strong>Umethibitishwa, ${member.name}!</strong> Akaunti yako iko tayari kwa hatua za Google Antigravity &amp; Termux hapa chini.`;
+        welcomeUser.textContent = `Karibu sana, ${member.name}! 🔥`;
+        showToast(`Karibu ${member.name}! Portal imefunguka 🚀`);
+      } else {
+        gateBanner.className = "status-banner status-warn show";
+        gateBanner.innerHTML = `⏳ <strong>Email (${clean}) bado haijaingizwa kwenye orodha.</strong> Tuma email yako kwenye group la <strong>Sillyger Community</strong> ili Admin akuongeze kwenye Antigravity — unaweza kuanza kuandaa Termux &amp; GitHub hapa chini sasa hivi!`;
+        welcomeUser.textContent = "Karibu mgeni wa Sillyger! Anza maandalizi 👇";
+      }
+    }
+
+    emailForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      applyMember(emailInput.value);
+      document.getElementById("stepsArea").scrollIntoView({ behavior: "smooth" });
+    });
+
+    const savedEmail = localStorage.getItem("sillyger_email");
+    if (savedEmail) {
+      emailInput.value = savedEmail;
+      applyMember(savedEmail);
+    }
+
+    // Step Progress Persistence
+    const checks = Array.from(document.querySelectorAll(".step-check"));
+    const progressBar = document.getElementById("progressBar");
+    const navProgress = document.getElementById("navProgress");
+    const stepCountLabel = document.getElementById("stepCountLabel");
+    const progressHint = document.getElementById("progressHint");
+
+    function updateProgress() {
+      const saved = JSON.parse(localStorage.getItem("sillyger_steps") || "{}");
+      let done = 0;
+      checks.forEach((cb) => {
+        const key = cb.dataset.step;
+        const isChecked = !!saved[key];
+        cb.checked = isChecked;
+        const card = cb.closest(".card");
+        if (card) card.classList.toggle("completed", isChecked);
+        if (isChecked) done++;
+      });
+      const pct = Math.round((done / checks.length) * 100);
+      progressBar.style.width = pct + "%";
+      navProgress.textContent = pct + "%";
+      stepCountLabel.textContent = `${done} / ${checks.length} Tayari`;
+      if (pct === 100) {
+        progressHint.textContent = "🎉 Hongera sana! Uko tayari kujenga mifumo, websites na apps kwenye simu yako!";
+      } else {
+        progressHint.textContent = "Kamilisha hatua 4 hapa chini uanze kuunda miradi halisi kwenye simu yako.";
+      }
+    }
+
+    checks.forEach((cb) => {
+      cb.addEventListener("change", () => {
+        const saved = JSON.parse(localStorage.getItem("sillyger_steps") || "{}");
+        saved[cb.dataset.step] = cb.checked;
+        localStorage.setItem("sillyger_steps", JSON.stringify(saved));
+        updateProgress();
+        if (cb.checked) showToast("👏 Hatua imekamilika! Endelea mbele!");
+      });
+    });
+
+    updateProgress();
+
+    // Copy Buttons
+    document.querySelectorAll("[data-copy]").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const el = document.getElementById(btn.dataset.copy);
+        if (!el) return;
+        const ok = await copyText(el.textContent.trim());
+        showToast(ok ? "✅ Command imecopiwa! Fungua Termux → Paste → Enter" : "⚠️ Imeshindwa kucopy, nakili kwa mkono.");
+      });
+    });
+
+    document.querySelectorAll("[data-text]").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const ok = await copyText(btn.dataset.text);
+        showToast(ok ? "✅ Imecopiwa kwenye clipboard!" : "⚠️ Imeshindwa kucopy.");
+      });
+    });
+
+    // Copy & Open Termux Intent
+    document.getElementById("copyAndOpenBtn").addEventListener("click", async () => {
+      const cmd = document.getElementById("mainSetupCmd").textContent.trim();
+      await copyText(cmd);
+      showToast("✅ Command imecopiwa! Inafungua Termux — Paste & bonyeza Enter 🚀");
+      // Android Intent URI to launch Termux directly on Chrome Android
+      setTimeout(() => {
+        window.location.href = "intent:#Intent;package=com.termux;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;end";
+      }, 450);
+    });
+  </script>
+</body>
+</html>
